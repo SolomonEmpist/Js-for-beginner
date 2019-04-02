@@ -1,0 +1,86 @@
+		  <html>
+		  <head>
+		  <title>Loan1.3</title>
+		  </head>
+		  <body>
+				<style>
+						.result{font-weight:bold}
+						#payment{text-decoration:underline}
+				</style>
+				<form name="loandata">
+					  <table>
+					  <tr><td>Enter information</td></tr>
+
+					  <tr><td>(1)amount of loan:</td>
+					  <td><input type="text" name="principal" onchange="calculate();"></td>
+					  </tr>
+
+					  <tr><td>(2)annual percentage rate of interest </td>
+					  <td> <input type="text" name="interest" onchange="calculate();">  </td>
+					  </tr>
+
+					  <tr><td> (3)repayment period in years</td>
+					  <td> <input type="text" onchange="calculate();" name="years">  </td>
+					  </tr>
+
+					  <tr><td> </td>
+					  <td>  <input type="button" value="Compute" onchange="calculate();"> </td>
+					  </tr>
+						   
+
+					  <tr><td> </td>
+					  <td>   Payment Information</td>
+					  </tr>
+
+					  <tr><td> (4)you monthly payment</td>
+					  <td>  $<span class="result" id="payment"></span> </td>
+					  </tr>
+
+					   <tr><td>(5)you total payment </td>
+					  <td> $  <span class="result" id="total"></span> </td>
+					  </tr>
+
+					  <tr><td> (6)your total interest payment</td>
+					  <td>  $ <span class="result" id="totalinterest"></span> </td>
+					  </tr>
+
+
+
+				</form>
+
+
+				<script>
+
+				   function calculate(){
+				   var principal=document.loandata.principal.value;
+				   var interest=document.loandata.interest.value;
+				   var payments=document.loandata.years.value;
+
+				   var x=Math.pow(1+interest,payments);
+				   var monthly=(principal*x*interest)/(x-1);
+
+				   var payment=document.getElementById("payment");
+				   var total=document.getElementById("total");
+				   var totalinterest=document.getElementById("totalinterest");
+
+				   if(isFinite(monthly)){
+				   payment.innerHTML=monthly.toFixed(2);
+				   total.innerHTML=(monthly*payments).toFixed(2);
+				   totalinterest.innerHTML=((monthly*payments)-principal).toFixed(2);
+				   }
+				   else{
+				   payment.innerHTML="";
+				   total.innerHTML="";
+				   totalinterest.innerHTML="";
+				   }
+
+
+				   
+				   }
+
+
+
+
+				</script>
+		  </body>
+		  </html>
